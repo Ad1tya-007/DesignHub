@@ -41,7 +41,6 @@ const Navbar = ({
                 : 'hover:bg-primary-grey-200'
             }
             `}>
-            {/* If value is an array means it's a nav element with sub options i.e., dropdown */}
             {Array.isArray(item.value) ? (
               <ShapesMenu
                 item={item}
@@ -51,7 +50,6 @@ const Navbar = ({
                 handleImageUpload={handleImageUpload}
               />
             ) : item?.value === 'comments' ? (
-              // If value is comments, trigger the NewThread component
               <NewThread>
                 <Button className="relative w-5 h-5 object-contain">
                   <Image
