@@ -4,13 +4,14 @@ import LeftSidebar from '@/components/LeftSidebar';
 import Live from '@/components/Live';
 import Navbar from '@/components/Navbar';
 import RightSidebar from '@/components/RightSidebar';
-import { ActiveElement, CustomFabricObject } from '@/types/type';
+import { ActiveElement, Attributes, CustomFabricObject } from '@/types/type';
 import { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
 import {
   handleCanvasMouseDown,
   handleCanvasMouseUp,
   handleCanvasObjectModified,
+  handleCanvasObjectScaling,
   handleCanvasSelectionCreated,
   handleCanvaseMouseMove,
   handleResize,
@@ -37,7 +38,17 @@ export default function Page() {
 
   const imageInputRef = useRef<HTMLInputElement>(null);
 
-  const isEditingRef = useRef(null);
+  const isEditingRef = useRef(false);
+
+  const [elementAttributes, setElementAttributes] = useState<Attributes>({
+    width: '',
+    height: '',
+    fontSize: '',
+    fontFamily: '',
+    fontWeight: '',
+    fill: '#aabbcc',
+    stroke: '#aabbcc',
+  });
 
   const syncShapeInStorage = useMutation(({ storage }, object) => {
     if (!object) return;
@@ -147,6 +158,13 @@ export default function Page() {
       });
     });
 
+    canvas.on('object:scaling', (options: any) => {
+      handleCanvasObjectScaling({
+        options,
+        setElementAttributes,
+      });
+    });
+
     window.addEventListener('resize', () => {
       handleResize({
         fabricRef,
@@ -197,7 +215,14 @@ export default function Page() {
         <section className="flex flex-row h-full">
           <LeftSidebar allShapes={Array.from(canvasObjects)} />
           <Live canvasRef={canvasRef} />
-          <RightSidebar />
+          <RightSidebar
+            elementAttributes={elementAttributes}
+            setElementAttributes={setElementAttributes}
+            fabricRef={fabricRef}
+            isEditingRef={isEditingRef}
+            activeObjectRef={activeObjectRef}
+            syncShapeInStorage={syncShapeInStorage}
+          />
         </section>
       </main>
     </div>
