@@ -11,6 +11,7 @@ import {
   handleCanvasMouseDown,
   handleCanvasMouseUp,
   handleCanvasObjectModified,
+  handleCanvasSelectionCreated,
   handleCanvaseMouseMove,
   handleResize,
   initializeFabric,
@@ -35,6 +36,8 @@ export default function Page() {
   const canvasObjects = useStorage((root) => root.canvasObjects);
 
   const imageInputRef = useRef<HTMLInputElement>(null);
+
+  const isEditingRef = useRef(null);
 
   const syncShapeInStorage = useMutation(({ storage }, object) => {
     if (!object) return;
@@ -133,6 +136,14 @@ export default function Page() {
       handleCanvasObjectModified({
         options,
         syncShapeInStorage,
+      });
+    });
+
+    canvas.on('selection:created', (options: any) => {
+      handleCanvasSelectionCreated({
+        options,
+        isEditingRef,
+        setElementAttributes,
       });
     });
 
