@@ -72,7 +72,6 @@ export default function Page() {
     for (const [key, value] of canvasObjects.entries()) {
       canvasObjects.delete(key);
     }
-
     return canvasObjects.size === 0;
   }, []);
 
@@ -175,7 +174,7 @@ export default function Page() {
 
     window.addEventListener('resize', () => {
       handleResize({
-        fabricRef,
+        canvas: fabricRef.current,
       });
     });
 

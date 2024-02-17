@@ -4,7 +4,6 @@ import {
   useBroadcastEvent,
   useEventListener,
   useMyPresence,
-  useOthers,
 } from '@/liveblocks.config';
 import CursorChat from './Cursor/CursorChat';
 import { CursorMode, CursorState, Reaction, ReactionEvent } from '@/types/type';
@@ -21,14 +20,13 @@ import {
 import { shortcuts } from '@/constants';
 
 type LiveProps = {
-  canvasRef: React.MutableRefObject<HTMLCanvasElement> | null;
+  canvasRef: React.RefObject<HTMLCanvasElement> | null;
   undo: () => void;
   redo: () => void;
 };
 
 const Live = ({ canvasRef, undo, redo }: LiveProps) => {
-  const others = useOthers();
-  const [{ cursor }, updateMyPresence] = useMyPresence() as any;
+  const [{ cursor }, updateMyPresence] = useMyPresence();
 
   const [cursorState, setCursorState] = useState<CursorState>({
     mode: CursorMode.Hidden,
@@ -64,7 +62,7 @@ const Live = ({ canvasRef, undo, redo }: LiveProps) => {
   }, 50);
 
   useEventListener((eventData) => {
-    const event = eventData.event as ReactionEvent;
+    const event = eventData.event;
     setReaction((reactions) =>
       reactions.concat([
         {
@@ -214,7 +212,7 @@ const Live = ({ canvasRef, undo, redo }: LiveProps) => {
         {cursorState.mode === CursorMode.ReactionSelector && (
           <ReactionSelector setReaction={setReactions} />
         )}
-        <LiveCursors others={others} />
+        <LiveCursors />
 
         <Comments />
       </ContextMenuTrigger>
