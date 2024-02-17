@@ -6,7 +6,7 @@ import {
   useMyPresence,
 } from '@/liveblocks.config';
 import CursorChat from './Cursor/CursorChat';
-import { CursorMode, CursorState, Reaction, ReactionEvent } from '@/types/type';
+import { CursorMode, CursorState, Reaction } from '@/types/type';
 import ReactionSelector from './Reaction/ReactionButton';
 import FlyingReaction from './Reaction/FlyingReaction';
 import useInterval from '@/hooks/useInterval';
