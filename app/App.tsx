@@ -1,10 +1,7 @@
 'use client';
 
-import LeftSidebar from '@/components/LeftSidebar';
-import Live from '@/components/Live';
-import Navbar from '@/components/Navbar';
-import RightSidebar from '@/components/RightSidebar';
-import { ActiveElement, Attributes, CustomFabricObject } from '@/types/type';
+import { LeftSidebar, Live, Navbar, RightSidebar } from '@/components/index';
+import { ActiveElement, Attributes } from '@/types/type';
 import { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
 import {
