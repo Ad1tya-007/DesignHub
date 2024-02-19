@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import Dimensions from './Settings/Dimensions';
-import Text from './Settings/Text';
-import Color from './Settings/Color';
-import Export from './Settings/Export';
+import Dimensions from './settings/Dimensions';
+import Text from './settings/Text';
+import Color from './settings/Color';
+import Export from './settings/Export';
 import { RightSidebarProps } from '@/types/type';
 import { modifyShape } from '@/lib/shapes';
 
