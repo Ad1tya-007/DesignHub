@@ -10,8 +10,8 @@ const work_sans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Figma Clone',
-  description: 'A minimilist Figma Clone',
+  title: 'DesignHub',
+  description: 'Your minimalist haven for creative collaboration',
 };
 
 export default function RootLayout({
